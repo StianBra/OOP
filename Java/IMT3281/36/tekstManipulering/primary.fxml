@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+ 
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.stiabra.uke36lab.PrimaryController">
+   <right>
+      <VBox prefHeight="200.0" prefWidth="140.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <RadioButton fx:id="radButUnchanged" mnemonicParsing="false" selected="true" text="Uforandret">
+               <toggleGroup>
+                  <ToggleGroup fx:id="buttons" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radButSmall" mnemonicParsing="false" text="Små bokstaver" toggleGroup="$buttons" />
+            <RadioButton fx:id="radButLarge" mnemonicParsing="false" text="Store bokstaver" toggleGroup="$buttons" />
+            <RadioButton fx:id="radButBack" mnemonicParsing="false" text="Baklengs" toggleGroup="$buttons" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </right>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <TextArea fx:id="outputField" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <BorderPane BorderPane.alignment="CENTER">
+               <center>
+                  <TextField fx:id="inputField" onAction="#sendInput" BorderPane.alignment="CENTER" />
+               </center>
+               <right>
+                  <Button fx:id="textButton" mnemonicParsing="false" onAction="#sendInput" text="Button" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </bottom>
+      </BorderPane>
+   </center>
+</BorderPane>

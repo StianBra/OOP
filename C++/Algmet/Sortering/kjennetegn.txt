@@ -1,0 +1,30 @@
+Navn                Property        side            Stabil              Orden
+
+selection           8.1             98                                  N²/2
+insertion           8.2             100                                 Best case (N), Normalt (N²/4)
+bubble              8.3             101                                 N²/2
+
+shell               8.6             109                                 max N(³/²)
+quick               9.1             118             Ikke                2N ln N
+Heap-operasjoner    11.1            150-153                             max 2 lg N         
+Heap                11.3            155&156                             2N lg N
+Merge               12.1            166&168								N lg N     						
+
+
+
+
+Quicksort er rekursiv
+Mergesort er rekursiv
+
+
+Heap
+	upheap, downheap
+	fremstille som trær, array
+
+	bottom-up
+
+
+Mergesort 
+	Mergesort lister
+	
+

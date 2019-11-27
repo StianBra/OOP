@@ -78,16 +78,27 @@ public class GameOfLife {
         // Creates a 2D bool-array 'copy' of the board, containing cells that should be killed after this iteration
         boolean[][] cellsToKill = new boolean[grid.length][grid[0].length];
 
+        // Creates a 2D bool-array 'copy' of the board, containing cells that should be revived after this iteration
+        boolean[][] cellsToRevive = new boolean[grid.length][grid[0].length];
+
         // Processes every cell on the grid
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
+                // Gets the amount of neighbours for the current cell
+                int neighbourCount = amountOfNeighbours(i, j);
+
                 // If the cell is alive at the moment
                 if (isAlive(i, j)) {
                     // And it has less than two neighbours, or more than three neighbours
-                    int neighbourCount = amountOfNeighbours(i, j);
                     if (neighbourCount < 2 || neighbourCount > 3) {
                         // Then we have to kill it
                         cellsToKill[i][j] = true;
+                    }
+                } else {
+                    // Cell is dead at the moment
+                    if (neighbourCount == 3) {
+                        // Then it should become alive
+                        cellsToRevive[i][j] = true;
                     }
                 }
             }
@@ -96,10 +107,13 @@ public class GameOfLife {
         // Processes every cell on the grid again, killing everything that has been tagged
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                // If the current cell is tagged
+                // If the current cell is set to be slain
                 if (cellsToKill[i][j]) {
                     // Then kill it on the game of life-board
                     setDeadCell(i, j);
+                } else if (cellsToRevive[i][j]) {
+                    // Current cell is set to be revived, make it so
+                    setLivingCell(i, j);
                 }
             }
         }
@@ -114,4 +128,5 @@ public class GameOfLife {
     public boolean isAlive(int row, int column) {
         return grid[row][column];
     }
+
 }

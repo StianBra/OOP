@@ -17,6 +17,14 @@ class GameOfLifeTest {
         GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
 
         // Checks that [1, 4] has 0 neighbours
-        assertEquals(0, game.amountOfNeighbours(1, 4));
+        assertEquals(0, game.amountOfNeighbours(2, 3));
+    }
+
+    /**
+     * Creates a living cell, and confirms that it is found as a neighbour
+     */
+    @Test
+    void testLivingNeighbour() {
+
     }
 }

@@ -63,19 +63,43 @@ public class GameOfLife {
     }
 
     /**
+     * Sets a given cell [row, column] as dead (false)
+     * @param row The row for the cell to set as dead
+     * @param column The column for the cell to set as dead
+     */
+    public void setDeadCell(int row, int column) {
+        grid[row][column] = false;
+    }
+
+    /**
      * Generates the next state for the game of life-board, according to the rules
      */
     public void generateNextState() {
-        // Kills all cells that only have two neighbours
+        // Creates a 2D bool-array 'copy' of the board, containing cells that should be killed after this iteration
+        boolean[][] cellsToKill = new boolean[grid.length][grid[0].length];
+
+        // Processes every cell on the grid
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 // If the cell is alive at the moment
                 if (isAlive(i, j)) {
-                    // And it has less than two neighbours
-                    if (amountOfNeighbours(i, j) < 2) {
+                    // And it has less than two neighbours, or more than three neighbours
+                    int neighbourCount = amountOfNeighbours(i, j);
+                    if (neighbourCount < 2 || neighbourCount > 3) {
                         // Then we have to kill it
-                        grid[i][j] = false;
+                        cellsToKill[i][j] = true;
                     }
+                }
+            }
+        }
+
+        // Processes every cell on the grid again, killing everything that has been tagged
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                // If the current cell is tagged
+                if (cellsToKill[i][j]) {
+                    // Then kill it on the game of life-board
+                    setDeadCell(i, j);
                 }
             }
         }

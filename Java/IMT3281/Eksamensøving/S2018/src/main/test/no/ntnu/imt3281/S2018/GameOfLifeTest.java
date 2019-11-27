@@ -43,4 +43,173 @@ class GameOfLifeTest {
         // Checks that [3, 3] now has 1 neighbour
         assertEquals(1, game.amountOfNeighbours(3, 3));
     }
+
+    /**
+     * Creates two living cells, and confirms that they are both found as neighbours
+     */
+    @Test
+    void testTwoLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3] and [0, 4]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+
+        // Checks that [1, 4] now has 2 neighbours
+        assertEquals(2, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Creates three living cells, and confirms that they are all found as neighbours
+     */
+    @Test
+    void testThreeLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Checks that [1, 4] now has 3 neighbours
+        assertEquals(3, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Creates four living cells, and confirms that they are all found as neighbours
+     */
+    @Test
+    void testFourLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Creates a new living cell in [1, 5]
+        game.setLivingCell(1, 5);
+
+        // Checks that [1, 4] now has 4 neighbours
+        assertEquals(4, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Creates five living cells, and confirms that they are all found as neighbours
+     */
+    @Test
+    void testFiveLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Creates a new living cell in [1, 5] and [2, 5]
+        game.setLivingCell(1, 5);
+        game.setLivingCell(2, 5);
+
+        // Checks that [1, 4] now has 5 neighbours
+        assertEquals(5, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Creates six living cells, and confirms that they are all found as neighbours
+     */
+    @Test
+    void testSixLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Creates a new living cell in [1, 5], [2, 4], and [2, 5]
+        game.setLivingCell(1, 5);
+        game.setLivingCell(2, 4);
+        game.setLivingCell(2, 5);
+
+        // Checks that [1, 4] now has 6 neighbours
+        assertEquals(6, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Creates seven living cells, and confirms that they are all found as neighbours
+     */
+    @Test
+    void testSevenLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Creates a new living cell in [1, 5]
+        game.setLivingCell(1, 5);
+
+        // Creates a new living cell in [2, 3], [2, 4], and [2, 5]
+        game.setLivingCell(2, 3);
+        game.setLivingCell(2, 4);
+        game.setLivingCell(2, 5);
+
+        // Checks that [1, 4] now has 7 neighbours
+        assertEquals(7, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Creates eight living cells, and confirms that they are all found as neighbours
+     */
+    @Test
+    void testEightLivingNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Creates a new living cell in [1, 3] and [1, 5]
+        game.setLivingCell(1, 3);
+        game.setLivingCell(1, 5);
+
+        // Creates a new living cell in [2, 3], [2, 4], and [2, 5]
+        game.setLivingCell(2, 3);
+        game.setLivingCell(2, 4);
+        game.setLivingCell(2, 5);
+
+        // Checks that [1, 4] now has 8 neighbours
+        assertEquals(8, game.amountOfNeighbours(1, 4));
+    }
+
+    /**
+     * Tests neighbour-amounts in the top left corner
+     */
+    @Test
+    void testUpperLeftNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 1], [1, 0], and [1, 1]
+        game.setLivingCell(0, 1);
+        game.setLivingCell(1, 0);
+        game.setLivingCell(1, 1);
+
+        // Checks that [0, 0] now has 3 neighbours
+        assertEquals(3, game.amountOfNeighbours(0, 0));
+    }
+
+    // Det er levende celler i rad 3 kolonne 6 og rad 2, kolonne 6 og 7. Cellen i rad 3, kolonne 7 har tre naboer.
+    // Om en sjekker for øverste høyre hjørne og nederste venstre hjørne så skal også disse kunne ha tre naboer.
+
+
 }

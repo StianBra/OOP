@@ -42,7 +42,8 @@ public class GameOfLife {
                 // Takes care not to count the cell itself, and also checks that the cell being checked is not ...
                 // ... out of bounds
                 if ((i != row || j != column) && i >= 0 && j >= 0 && i < grid.length && j < grid[0].length && grid[i][j]) {
-                    // If the cell is alive, then increase the amount of neighbours
+                    // The cell is alive, is not the one we're checking against, and it's not out of bounds,
+                    // so we increase the amount of neighbours found
                     neighbours++;
                 }
             }
@@ -59,5 +60,34 @@ public class GameOfLife {
      */
     public void setLivingCell(int row, int column) {
         grid[row][column] = true;
+    }
+
+    /**
+     * Generates the next state for the game of life-board, according to the rules
+     */
+    public void generateNextState() {
+        // Kills all cells that only have two neighbours
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                // If the cell is alive at the moment
+                if (isAlive(i, j)) {
+                    // And it has less than two neighbours
+                    if (amountOfNeighbours(i, j) < 2) {
+                        // Then we have to kill it
+                        grid[i][j] = false;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks whether a given cell [row, column] is alive or not
+     * @param row The row for the cell
+     * @param column The column for the cell
+     * @return True if the cell is alive, false if dead
+     */
+    public boolean isAlive(int row, int column) {
+        return grid[row][column];
     }
 }

@@ -128,5 +128,4 @@ public class GameOfLife {
     public boolean isAlive(int row, int column) {
         return grid[row][column];
     }
-
 }

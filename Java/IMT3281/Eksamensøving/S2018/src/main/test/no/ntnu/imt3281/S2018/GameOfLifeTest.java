@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class containing tests for the logic in GameOfLife
+ */
 class GameOfLifeTest {
     private static final int ROWSIZE = 4;
     private static final int COLUMNSIZE = 8;

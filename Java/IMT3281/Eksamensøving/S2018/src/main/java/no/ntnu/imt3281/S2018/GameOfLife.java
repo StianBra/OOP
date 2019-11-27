@@ -41,7 +41,7 @@ public class GameOfLife {
             for (int j = column - 1; j <= column + 2; j++) {
                 // Takes care not to count the cell itself, and also checks that the cell being checked is not ...
                 // ... out of bounds
-                if ((i != row || j != column) && i < grid.length && j < grid[0].length && grid[i][j]) {
+                if ((i != row || j != column) && i >= 0 && j >= 0 && i < grid.length && j < grid[0].length && grid[i][j]) {
                     // If the cell is alive, then increase the amount of neighbours
                     neighbours++;
                 }

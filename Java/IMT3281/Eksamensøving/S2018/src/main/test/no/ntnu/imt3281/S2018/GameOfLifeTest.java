@@ -208,8 +208,22 @@ class GameOfLifeTest {
         assertEquals(3, game.amountOfNeighbours(0, 0));
     }
 
-    // Det er levende celler i rad 3 kolonne 6 og rad 2, kolonne 6 og 7. Cellen i rad 3, kolonne 7 har tre naboer.
-    // Om en sjekker for øverste høyre hjørne og nederste venstre hjørne så skal også disse kunne ha tre naboer.
+    /**
+     * Tests neighbour-amounts in the bottom right corner
+     */
+    @Test
+    void testLowerRightNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [3, 6], [2, 6], and [2, 7]
+        game.setLivingCell(3, 6);
+        game.setLivingCell(2, 6);
+        game.setLivingCell(2, 7);
+
+        // Checks that [3, 7] now has 3 neighbours
+        assertEquals(3, game.amountOfNeighbours(3, 7));
+    }
 
 
 }

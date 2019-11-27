@@ -17,14 +17,21 @@ class GameOfLifeTest {
         GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
 
         // Checks that [1, 4] has 0 neighbours
-        assertEquals(0, game.amountOfNeighbours(2, 3));
+        assertEquals(0, game.amountOfNeighbours(1, 4));
     }
 
     /**
      * Creates a living cell, and confirms that it is found as a neighbour
      */
     @Test
-    void testLivingNeighbour() {
+    void testOneLivingNeighbour() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
 
+        // Creates a new living cell in [0, 3]
+        game.setLivingCell(0, 3);
+
+        // Checks that [1, 4] now has 1 neighbour
+        assertEquals(1, game.amountOfNeighbours(1, 4));
     }
 }

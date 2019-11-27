@@ -37,8 +37,8 @@ public class GameOfLife {
         int neighbours = 0;
 
         // Checks all cells in a 3x3 grid centered around the given point [row, column]
-        for (int i = row - 1; i <= row + 2; i++) {
-            for (int j = column - 1; j <= column + 2; j++) {
+        for (int i = row - 1; i <= row + 1; i++) {
+            for (int j = column - 1; j <= column + 1; j++) {
                 // Takes care not to count the cell itself, and also checks that the cell being checked is not ...
                 // ... out of bounds
                 if ((i != row || j != column) && i >= 0 && j >= 0 && i < grid.length && j < grid[0].length && grid[i][j]) {
@@ -97,7 +97,7 @@ public class GameOfLife {
                 } else {
                     // Cell is dead at the moment
                     if (neighbourCount == 3) {
-                        // Then it should become alive
+                        // It should become alive since it has three neighbours
                         cellsToRevive[i][j] = true;
                     }
                 }

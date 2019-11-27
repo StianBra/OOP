@@ -320,4 +320,32 @@ class GameOfLifeTest {
         assertTrue(game.isAlive(1, 4));
     }
 
+    /**
+     * Tests that the entire game of life-board performs as expected
+     */
+    @Test
+    void testEntireBoard() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [1, 4], [2, 3], and [2, 4]
+        game.setLivingCell(1, 4);
+        game.setLivingCell(2, 3);
+        game.setLivingCell(2, 4);
+
+        // Generates the next state for the game of life
+        game.generateNextState();
+
+        // Checks that [1, 3], [1, 4], [2, 3], and [2, 4] are alive
+        assertTrue(game.isAlive(1, 3));
+        assertTrue(game.isAlive(1, 4));
+        assertTrue(game.isAlive(2, 3));
+        assertTrue(game.isAlive(2, 4));
+
+        // Checks that other cells are dead
+        assertFalse(game.isAlive(1, 2));
+        assertFalse(game.isAlive(0, 0));
+        assertFalse(game.isAlive(3, 6));
+        assertFalse(game.isAlive(3, 3));
+    }
 }

@@ -244,5 +244,25 @@ class GameOfLifeTest {
         assertFalse(game.isAlive(0, 0));
     }
 
+    /**
+     * Checks if a cell with at least two neighbours stays alive
+     */
+    @Test
+    void testCellWithAtLeastTwoNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 0], [0, 1], and [1, 1]
+        game.setLivingCell(0, 0);
+        game.setLivingCell(0, 1);
+        game.setLivingCell(1, 1);
+
+        // Generates the next state for the game of life
+        game.generateNextState();
+
+        // Verifies that the cell in 0, 0 is still alive, since it had at least two neighbours
+        assertTrue(game.isAlive(0, 0));
+    }
+
 
 }

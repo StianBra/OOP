@@ -33,5 +33,14 @@ class GameOfLifeTest {
 
         // Checks that [1, 4] now has 1 neighbour
         assertEquals(1, game.amountOfNeighbours(1, 4));
+
+        // Creates another empty board
+        game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [2, 3]
+        game.setLivingCell(2, 3);
+
+        // Checks that [3, 3] now has 1 neighbour
+        assertEquals(1, game.amountOfNeighbours(3, 3));
     }
 }

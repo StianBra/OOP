@@ -51,4 +51,13 @@ public class GameOfLife {
         // Returns the amount of neighbours
         return neighbours;
     }
+
+    /**
+     * Sets a given cell [row, column] as living (true)
+     * @param row The row for the cell to set as living
+     * @param column The column for the cell to set as living
+     */
+    public void setLivingCell(int row, int column) {
+        grid[row][column] = true;
+    }
 }

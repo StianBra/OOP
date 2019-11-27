@@ -237,6 +237,9 @@ class GameOfLifeTest {
         game.setLivingCell(0, 0);
         game.setLivingCell(0, 1);
 
+        // Verifies that the cell in 0, 0 is alive
+        assertTrue(game.isAlive(0, 0));
+
         // Generates the next state for the game of life
         game.generateNextState();
 
@@ -257,6 +260,9 @@ class GameOfLifeTest {
         game.setLivingCell(0, 1);
         game.setLivingCell(1, 1);
 
+        // Verifies that the cell in 0, 0 is alive
+        assertTrue(game.isAlive(0, 0));
+
         // Generates the next state for the game of life
         game.generateNextState();
 
@@ -264,5 +270,31 @@ class GameOfLifeTest {
         assertTrue(game.isAlive(0, 0));
     }
 
+    /**
+     * Checks if a cell with more than three neighbours dies properly
+     */
+    @Test
+    void testCellWithMoreThanThreeNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Creates a new living cell in [1, 4] and [1, 5]
+        game.setLivingCell(1, 4);
+        game.setLivingCell(1, 5);
+
+        // Verifies that the cell in 1, 4 is alive
+        assertTrue(game.isAlive(1, 4));
+
+        // Generates the next state for the game of life
+        game.generateNextState();
+
+        // Verifies that the cell in 1, 4 is now dead, since it had more than three neighbours
+        assertFalse(game.isAlive(1, 4));
+    }
 
 }

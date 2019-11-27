@@ -297,4 +297,27 @@ class GameOfLifeTest {
         assertFalse(game.isAlive(1, 4));
     }
 
+    /**
+     * Checks if a cell with exactly three neighbours becomes alive
+     */
+    @Test
+    void testCellWithExactlyThreeNeighbours() {
+        // Creates an empty board
+        GameOfLife game = new GameOfLife(ROWSIZE, COLUMNSIZE);
+
+        // Creates a new living cell in [0, 3], [0, 4], and [0, 5]
+        game.setLivingCell(0, 3);
+        game.setLivingCell(0, 4);
+        game.setLivingCell(0, 5);
+
+        // Verifies that the cell in 1, 4 is dead
+        assertFalse(game.isAlive(1, 4));
+
+        // Generates the next state for the game of life
+        game.generateNextState();
+
+        // Verifies that the cell in 1, 4 is now alive
+        assertTrue(game.isAlive(1, 4));
+    }
+
 }

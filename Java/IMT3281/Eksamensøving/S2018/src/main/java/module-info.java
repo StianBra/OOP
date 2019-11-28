@@ -1,4 +1,4 @@
-module no.ntnu.imt3281.javafx {
+module no.ntnu.imt3281.S2018 {
     requires javafx.controls;
     requires javafx.fxml;
 

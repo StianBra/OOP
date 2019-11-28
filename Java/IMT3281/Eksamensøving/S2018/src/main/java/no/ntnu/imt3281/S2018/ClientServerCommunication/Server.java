@@ -1,7 +1,5 @@
 package no.ntnu.imt3281.S2018.ClientServerCommunication;
 
-import javafx.application.Platform;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,13 +15,18 @@ public class Server {
     private final ArrayList<Connection> connections = new ArrayList<>();
     private final LinkedBlockingQueue<Message> messages = new LinkedBlockingQueue<>();
 
-    private ServerSocket serverSocket;
     private boolean shutdown;
 
     private void start() {
         startListener();
         startProcessor();
         startSender();
+    }
+
+    public static void main(String[] args) {
+        Server server = new Server();
+
+        server.start();
     }
 
     /**
@@ -43,25 +46,16 @@ public class Server {
      */
     private void startListener() {
         Thread listener = new Thread(() -> {
-            Timer timer = new Timer();
-            TimerTask listen = new TimerTask() {
-                public void run() {
-                    Platform.runLater(() -> {
-                        try {
-                            serverSocket = new ServerSocket(4444);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+            try {
+                ServerSocket serverSocket = new ServerSocket(4444);
 
-                        while (!shutdown) {
-                            getConnections();
-                        }
-                    });
+                while (!shutdown) {
+                    getConnections(serverSocket);
                 }
-            };
-            timer.scheduleAtFixedRate(listen, 50L, 50L);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
-
         listener.start();
     }
 
@@ -69,7 +63,7 @@ public class Server {
     /**
      * Function for retrieving new client connections
      */
-    private void getConnections() {
+    private void getConnections(ServerSocket serverSocket) {
         Socket clientSocket = null;
 
         try {
@@ -79,6 +73,10 @@ public class Server {
         }
 
         Connection connection = new Connection(clientSocket);
+
+        synchronized (connections) {
+            connections.add(connection);
+        }
     }
 
 

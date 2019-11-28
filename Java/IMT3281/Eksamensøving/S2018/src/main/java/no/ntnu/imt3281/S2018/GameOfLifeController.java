@@ -1,6 +1,8 @@
 package no.ntnu.imt3281.S2018;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -23,12 +25,16 @@ public class GameOfLifeController {
     @FXML
     private TextField columnField;
 
+    @FXML
+    private Label generationNum;
+
     private GameOfLife game;
     private int rows = 10;
     private int columns = 10;
     private Rectangle[][] rectangles;
     private double widthPerGrid;
     private double heightPerGrid;
+    private int generations;
 
     /**
      * Initializes some of the GUI elements to sane defaults
@@ -39,6 +45,8 @@ public class GameOfLifeController {
         columnField.setText(String.valueOf(columns));
         game = new GameOfLife(rows, columns);
         rectangles = new Rectangle[rows][columns];
+
+        generationNum.setText(String.valueOf(generations));
     }
 
     /**
@@ -103,6 +111,21 @@ public class GameOfLifeController {
 
             // And color it white
             rectangles[x][y].setFill(Color.TRANSPARENT);
+        }
+    }
+
+    public void generateStep(ActionEvent actionEvent) {
+        game.generateNextState();
+        syncRectsWithLogic(game, rectangles);
+        generationNum.setText(String.valueOf(generations++));
+    }
+
+    private void syncRectsWithLogic(GameOfLife game, Rectangle[][] rectangles) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                // If the cell at [i][j] is alive, color the rectangle black, or else color it transparent
+                rectangles[i][j].setFill(game.isAlive(i, j) ? Color.BLACK : Color.TRANSPARENT);
+            }
         }
     }
 }

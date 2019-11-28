@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,10 +42,10 @@ public class GameOfLifeController {
     private double heightPerGrid;
     private int generations;
     private boolean active;
-    Timer timer;
+    private Timer timer;
 
     /**
-     * Initializes some of the GUI elements to sane defaults
+     * Initializes the GUI elements to defaults
      */
     @FXML
     private void initialize() {
@@ -54,6 +53,8 @@ public class GameOfLifeController {
         columnField.setText(String.valueOf(columns));
         game = new GameOfLife(rows, columns);
         rectangles = new Rectangle[rows][columns];
+        gameOfLife.getChildren().clear();
+        generations = 0;
 
         generationNum.setText(String.valueOf(generations));
         speedDropdown.setItems(FXCollections.observableArrayList("0.5 generasjoner pr. sekund", "1 generasjon pr. sekund", "2 generasjoner pr. sekund"));
@@ -65,37 +66,29 @@ public class GameOfLifeController {
      */
     @FXML
     void drawGrid() {
+        // Removes the old rectangles
+        gameOfLife.getChildren().removeAll();
+
+        // Gets the width/height per rectangle
         widthPerGrid = gameOfLife.getWidth() / rows;
         heightPerGrid = gameOfLife.getHeight() / columns;
 
+        // Iterates through every row/column cell
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
+                // And creates new rectangles, making them white with black edges
                 Rectangle rect = new Rectangle(widthPerGrid, heightPerGrid);
                 rect.setFill(Color.TRANSPARENT);
                 rect.setStroke(Color.BLACK);
+
+                // Adds the rectangles to the anchorpane
                 gameOfLife.getChildren().add(rect);
                 rect.setTranslateX(i * widthPerGrid);
                 rect.setTranslateY(j * heightPerGrid);
-                
+
+                // And adds them to the rectangles array
                 rectangles[j][i] = rect;
             }
-        }
-    }
-
-    @FXML
-    private void updateBoardSize() {
-        Optional<Integer> rowCountText = Optional.of(Integer.parseInt(rowField.getText()));
-        Optional<Integer> columnCountText = Optional.of(Integer.parseInt(columnField.getText()));
-
-        int rowCount = 10;
-        int columnCount = 10;
-
-        if (rowCountText.isPresent()) {
-            rowCount = rowCountText.get();
-        }
-
-        if (columnCountText.isPresent()) {
-            columnCount = columnCountText.get();
         }
     }
 
@@ -214,5 +207,23 @@ public class GameOfLifeController {
     public void pauseGeneration() {
         active = false;
         timer.cancel();
+    }
+
+    /**
+     * Resets the game of life-grid
+     */
+    public void resetGrid() {
+        // First checks that the game is not actively generating new states
+        if (!active) {
+            // Gets the new size of the board
+            rows = Integer.parseInt(rowField.getText());
+            columns = Integer.parseInt(columnField.getText());
+
+            // Sets up the GUI rectangles & logic array to the new sizes, resets other variables
+            initialize();
+
+            // Draws the new GUI
+            drawGrid();
+        }
     }
 }

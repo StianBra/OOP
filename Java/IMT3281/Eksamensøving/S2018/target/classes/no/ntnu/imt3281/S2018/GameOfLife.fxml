@@ -48,7 +48,7 @@
                                           <TextField fx:id="columnField" maxWidth="90.0" BorderPane.alignment="CENTER" />
                                        </center>
                                        <right>
-                                          <Button mnemonicParsing="false" text="Reset" BorderPane.alignment="CENTER" />
+                                          <Button mnemonicParsing="false" onAction="#resetGrid" text="Reset" BorderPane.alignment="CENTER" />
                                        </right>
                                     </BorderPane>
                                  </center>

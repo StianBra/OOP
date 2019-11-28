@@ -24,7 +24,7 @@
                               <Label fx:id="generationNum" text="####" BorderPane.alignment="CENTER" />
                            </center>
                            <padding>
-                              <Insets right="150.0" />
+                              <Insets right="175.0" />
                            </padding>
                         </BorderPane>
                      </top>
@@ -74,23 +74,20 @@
                            <left>
                               <Label text="Hastighet" BorderPane.alignment="CENTER" />
                            </left>
-                           <center>
-                              <ChoiceBox prefWidth="100.0" BorderPane.alignment="CENTER" />
-                           </center>
                            <bottom>
                               <BorderPane BorderPane.alignment="CENTER">
                                  <left>
                                     <Button mnemonicParsing="false" onAction="#generateStep" text="Step" BorderPane.alignment="CENTER" />
                                  </left>
                                  <center>
-                                    <Button mnemonicParsing="false" text="Start" BorderPane.alignment="CENTER">
+                                    <Button mnemonicParsing="false" onAction="#startGeneration" text="Start" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
                                           <Insets />
                                        </BorderPane.margin>
                                     </Button>
                                  </center>
                                  <right>
-                                    <Button mnemonicParsing="false" text="Pause" BorderPane.alignment="CENTER" />
+                                    <Button mnemonicParsing="false" onAction="#pauseGeneration" text="Pause" BorderPane.alignment="CENTER" />
                                  </right>
                                  <BorderPane.margin>
                                     <Insets left="25.0" top="5.0" />
@@ -101,8 +98,11 @@
                               </BorderPane>
                            </bottom>
                            <padding>
-                              <Insets right="75.0" />
+                              <Insets right="25.0" />
                            </padding>
+                           <right>
+                              <ChoiceBox fx:id="speedDropdown" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </right>
                         </BorderPane>
                      </center>
                      <padding>

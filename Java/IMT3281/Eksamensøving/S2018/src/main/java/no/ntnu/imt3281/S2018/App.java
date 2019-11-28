@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         // Use GameOfLife.fxml as the main window-layout
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOfLife.fxml"));
-        BorderPane root = loader.load();
+        AnchorPane root = loader.load();
 
         // Define what closing the window will do (Simply close everything)
         stage.setOnCloseRequest(event -> {
@@ -33,7 +32,10 @@ public class App extends Application {
         // Load the scene
         scene = new Scene(root);
         stage.setScene(scene);
+        GameOfLifeController gameOfLife = loader.getController();
+        stage.setTitle("Game of Life");
         stage.show();
+        gameOfLife.drawGrid();
     }
 
 

@@ -2,7 +2,6 @@ package no.ntnu.imt3281.S2018.ClientServerCommunication;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Class containing information about a client connection to a server
@@ -11,11 +10,15 @@ public class Connection {
     // The socket the client uses to communicate with
     private Socket socket;
 
-    // The writer the client uses to communicate with
-    private BufferedWriter writer;
+    // The writer the server uses to send to clients
+    private ObjectOutputStream objectWriter;
+
+    // The reader the server uses to receive from clients
+    private ObjectInputStream objectReader;
 
     // The reader the client uses to communicate with
-    private BufferedReader reader;
+    private BufferedInputStream reader;
+
 
     /**
      * Creates a new user from a socket
@@ -25,67 +28,53 @@ public class Connection {
         socket = clientSocket;
 
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+            objectReader = new ObjectInputStream(socket.getInputStream());
+            objectWriter = new ObjectOutputStream(socket.getOutputStream());
+            reader = new BufferedInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Disconnects a client by closing its socket and output/input streams
+     * Disconnects a client by closing its input/output streams and the socket
      */
     public void disconnect() {
-        if (socket != null) {
             try {
+                sendMessage("TERMINATE");
+                objectWriter.close();
+                objectReader.close();
                 socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        if (reader != null) {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (writer != null) {
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
      * Sends a message to the client connection
      * @param message The message to send
      */
-    public void sendMessage(Message message) {
-        try {
-            writer.write(message.toString());
-            writer.newLine();
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void sendMessage(Object message) throws IOException {
+        if (message != null) {
+            System.out.println("Writing message: " + message + " to " + socket.toString());
+            objectWriter.writeObject(message);
+            objectWriter.flush();
         }
     }
 
     /**
      * Retrieves a message from the client connection
-     * @return The message that was retrieved
+     * @return The message that was retrieved, or null if no message
      */
-    public Message getMessage() {
-        String data = null;
+    public Object readMessage() {
         try {
-            data = reader.readLine();
-        } catch (IOException e) {
+            if (reader.available() > 0) {
+                return objectReader.readObject();
+            }
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return new Message(data);
+
+        return null;
     }
 }

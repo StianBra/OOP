@@ -5,13 +5,19 @@ package no.ntnu.imt3281.S2018.ClientServerCommunication;
  */
 public class Message {
 
-    private String text;
+    private int clientNumber;
+    private Object msg;
 
-    public Message(String data) {
-        text = data;
+    public Message(int client, Object message) {
+        clientNumber = client;
+        msg = message;
     }
 
-    public String getText() {
-        return text;
+    public int getClientNumber() {
+        return clientNumber;
+    }
+
+    public Object getMessage() {
+        return msg;
     }
 }

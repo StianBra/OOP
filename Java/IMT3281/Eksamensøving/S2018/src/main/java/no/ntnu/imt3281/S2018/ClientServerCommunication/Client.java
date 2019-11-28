@@ -1,4 +1,4 @@
-package no.ntnu.imt3281.S2018;
+package no.ntnu.imt3281.S2018.ClientServerCommunication;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

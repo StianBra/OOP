@@ -96,4 +96,25 @@ public class TestPlace {
 		// Checks that the length of the list is correct
 		assertEquals(10996, noreg.size());
 	}
+
+	/**
+	 * Tests if adding places to the database, and getting the closest places based on x/y coordiantes works
+	 */
+	@Test
+	public void testFindClosestPlace() {
+		Database database = Database.getTempDb();
+
+		String data = "101	Asak kirke	55	Kyrkje	Kirke	Church	Halden	Østfold	59.14465	11.45458		http://www.yr.no/stad/Noreg/Østfold/Halden/Asak_kirke/varsel.xml	http://www.yr.no/sted/Norge/	";
+		Place p = new Place(Arrays.asList(data.split("\t")));
+
+		database.addPlace(p);
+		assertEquals(p.getStedsnavn(), database.findClosestPlace(59, 11).getStedsnavn());
+
+        data = "101	Demma	41	Grend	Grend	Village	Halden	Østfold	59.16335	11.42916		http://www.yr.no/stad/Noreg/Østfold/Halden/Demma/varsel.xml	http://www.yr.no/sted/Norge/Østfold/Halden/Demma/varsel.xml	http://www.yr.no/place/Norway/Østfold/Halden/Demma/forecast.xml";
+        p = new Place(Arrays.asList(data.split("\t")));
+
+        database.addPlace(p);
+        assertNotEquals(p.getStedsnavn(), database.findClosestPlace(59.14, 11.45).getStedsnavn());
+        assertEquals(p.getStedsnavn(), database.findClosestPlace(59.16, 11.42).getStedsnavn());
+	}
 }

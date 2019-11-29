@@ -20,6 +20,7 @@ public class Place {
     private double lng;
     private String varselURL;
 
+
     /**
      * Constructor for a place
      * @param info List of different variables, see below
@@ -122,7 +123,7 @@ public class Place {
         try {
             url = new URL("http://fil.nrk.no/yr/viktigestader/noreg.txt");
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            System.err.println("URL for reading places is malformed! " + e.getMessage());
         }
 
         // Makes sure the URL is not null (in case it malformedURLException'ed)
@@ -138,7 +139,7 @@ public class Place {
                 noreg.add(Arrays.asList(line.split("\t")));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Encountered an IO error while reading from " + url + e.getMessage());
         }
 
         // Returns the whole file, as a list of lists of strings (tab-separated)

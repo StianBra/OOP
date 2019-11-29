@@ -1,12 +1,12 @@
 package no.ntnu.imt3281.yr_places;
-
-import com.sun.javafx.collections.ArrayListenerHelper;
-
 import java.sql.*;
 import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
+/**
+ * Class for the derby database, used to store places from yr
+ */
 public class Database {
     private Connection con;
     private static Database db = null;

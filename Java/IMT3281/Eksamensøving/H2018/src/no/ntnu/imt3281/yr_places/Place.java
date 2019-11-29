@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class containing variables and helper functions for 'places' from yr
+ */
 public class Place {
 
     private int kommunenr;
@@ -49,66 +52,33 @@ public class Place {
         return kommunenr;
     }
 
-    public void setKommunenr(int kommunenr) {
-        this.kommunenr = kommunenr;
-    }
-
     public String getStedsnavn() {
         return stedsnavn;
-    }
-
-    public void setStedsnavn(String stedsnavn) {
-        this.stedsnavn = stedsnavn;
     }
 
     public String getStedstype() {
         return stedstype;
     }
 
-    public void setStedstype(String stedstype) {
-        this.stedstype = stedstype;
-    }
-
     public String getKommune() {
         return kommune;
-    }
-
-    public void setKommune(String kommune) {
-        this.kommune = kommune;
     }
 
     public String getFylke() {
         return fylke;
     }
 
-    public void setFylke(String fylke) {
-        this.fylke = fylke;
-    }
-
     public double getLat() {
         return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
     }
 
     public double getLng() {
         return lng;
     }
 
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
     public String getVarselURL() {
         return varselURL;
     }
-
-    public void setVarselURL(String varselURL) {
-        this.varselURL = varselURL;
-    }
-
 
     /**
      * Gets the entire content of http://fil.nrk.no/yr/viktigestader/noreg.txt as a List of Lists of strings

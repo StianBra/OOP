@@ -2,6 +2,12 @@ package no.ntnu.imt3281.yr_places;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,7 +50,7 @@ public class TestPlace {
 	@Test
 	public void testInformationFetching() {
 		// First tries to get the titles (first line in the file)
-		List<String> titles = getPlaceInformation().get(0);
+		List<String> titles = Place.getPlaceInformation().get(0);
 
 		// Checks that the size of the list is correct
 		assertEquals(14, titles.size());
@@ -66,7 +72,7 @@ public class TestPlace {
 		assertEquals("Engelsk", titles.get(13));
 
 		// Tries to get line 1026, with information about Hamar
-		List<String> line1026 = getPlaceInformation().get(1025);
+		List<String> line1026 = Place.getPlaceInformation().get(1025);
 
 		// Checks that the size of the list is correct
 		assertEquals(14, titles.size());
@@ -85,9 +91,9 @@ public class TestPlace {
 		assertEquals("http://www.yr.no/sted/Norge/Hedmark/Hamar/Hamar/varsel.xml", hamar.getVarselURL());
 
 		// Tries getting the whole list
-		List<List<String>> noreg = getPlaceInformation();
+		List<List<String>> noreg = Place.getPlaceInformation();
 
 		// Checks that the length of the list is correct
-		assertEquals(10997, noreg.size());
+		assertEquals(10996, noreg.size());
 	}
 }

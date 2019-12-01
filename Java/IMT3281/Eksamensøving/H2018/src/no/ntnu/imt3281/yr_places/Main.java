@@ -1,5 +1,7 @@
 package no.ntnu.imt3281.yr_places;
 
+import no.ntnu.imt3281.weather.Weather;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class Main {
      * @param args Command-line arguments, not used
      */
     public static void main(String[] args) {
-        getAndStorePlaceInformation();
+        //getAndStorePlaceInformation();
     }
 
     /**

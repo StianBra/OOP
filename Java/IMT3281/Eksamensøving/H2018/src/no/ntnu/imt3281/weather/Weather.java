@@ -1,6 +1,7 @@
 package no.ntnu.imt3281.weather;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import no.ntnu.imt3281.yr_places.Database;
@@ -52,5 +53,8 @@ public class Weather {
                 System.err.println("Could not parse the URL for place! " + e.getMessage());
             }
         });
+
+        // Figures out whether 'Mannen' has fallen or not, and displays this in the bottom of the forecast
+        ((BorderPane)forecast.getParent()).bottomProperty().set(new Mannen());
     }
 }

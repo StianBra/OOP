@@ -1,6 +1,7 @@
 package no.ntnu.imt3281.weather;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,11 +14,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to parse XML forecasts and fetch some strings from them
+ */
 public class WeatherXML {
+
+    /**
+     * Gets the day of week + forecast for each date in a given XML-document based on the parameter URL
+     * @param url The URL to a XML forecast, for example http://www.yr.no/sted/Norge/%C3%98stfold/Halden/Demma/varsel.xml
+     * @return A list of strings containing dates and forecasts
+     */
     public static List<String> getForecastFromXML(URL url) {
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
-        Object result = null;
 
         DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
@@ -29,7 +38,7 @@ public class WeatherXML {
         try {
             builder = documentFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            System.err.println("Could not create XML document parser! " + e.getMessage());
         }
 
         assert builder != null;
@@ -39,7 +48,7 @@ public class WeatherXML {
         try {
             doc = builder.parse(String.valueOf(url.toURI()));
         } catch (URISyntaxException | SAXException | IOException e) {
-            e.printStackTrace();
+            System.err.println("Could not convert " + url + " to URI and/or load it in the XML document parser! " + e.getMessage());
         }
 
         assert doc != null;
@@ -48,17 +57,17 @@ public class WeatherXML {
         // Uses XPath to find title (day of week) and body (forecast) from the XML document
         try {
             XPathExpression expression = xpath.compile("/weatherdata/forecast/text/location/time/*/text()");
-            result = expression.evaluate(doc, XPathConstants.STRING);
-            forecast.add((String) result);
-            System.out.println(result.toString());
+            NodeList nodes = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);
+
+            // Processes each XPath Node and adds their strings to the forecast list
+            for (int i = 0; i < nodes.getLength(); i++) {
+                forecast.add(nodes.item(i).getNodeValue());
+                System.out.println(forecast.get(i));
+            }
+
         } catch (XPathExpressionException e) {
-            e.printStackTrace();
+            System.err.println("Encountered an error in the XPath-expression to find day of week + forecast! " + e.getMessage());
         }
-
-        assert result != null;
-
-
-
 
         return forecast;
     }

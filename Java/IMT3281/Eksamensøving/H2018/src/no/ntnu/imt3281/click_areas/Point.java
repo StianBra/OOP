@@ -1,4 +1,4 @@
-package no.ntnu.imt3281.click_areas;import java.util.Locale;
+package no.ntnu.imt3281.click_areas;
 
 /**
  * See : https://stackoverflow.com/a/8721483

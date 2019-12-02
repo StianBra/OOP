@@ -62,4 +62,23 @@ public class Search {
 
         return new JSON(response);
     }
+
+    public static JSON takesPartIn(int actorIndex) {
+        String response = null;
+        String request = "https://api.themoviedb.org/3/discover/movie?api_key=APIKEY&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people=ACTORID";
+        request = request.replace("APIKEY", APIKEY);
+        request = request.replace("ACTORID", String.valueOf(actorIndex));
+
+        System.out.println("Search request: " + request);
+
+        try {
+            response = Unirest.get(request).asString().getBody();
+            System.out.println(response);		// Outputs JSON response from server.
+            Unirest.shutdown();			// Must be called at the end of the application
+        } catch (UnirestException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return new JSON(response);
+    }
 }

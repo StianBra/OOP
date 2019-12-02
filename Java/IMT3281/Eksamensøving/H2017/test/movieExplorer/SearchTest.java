@@ -30,7 +30,6 @@ public class SearchTest {
 		assertEquals(138L, result.get("crew").get(0).getValue("id"));						// Person id (in themoviedb)
 	}
 
-	/*
 	@Test
 	public void testTakesPartInSearch() {
 		// TakesPartIn should use the search feature described on https://developers.themoviedb.org/3/discover
@@ -39,7 +38,7 @@ public class SearchTest {
 		// Return the result as a JSON object.
 		JSON result = Search.takesPartIn(138);
 		assertEquals("Pulp Fiction", 
-				result.get("results").get(0).getValue("original_title"));					// Quentin Tarantino is director of this movie
-		assertEquals(68L, (Long)result.getValue("total_results"), 5L);					// Was 68 on Oct. 19th, should not be more than 5 more/less by time of the exam
-	} */
+				result.get("results").get(1).getValue("original_title"));					// Quentin Tarantino is director of this movie
+		assertEquals(79L, (Long)result.getValue("total_results"), 5L);		// Was 68 on Oct. 19th 2017, edited to 79 on Dec. 2nd 2019
+	}
 }

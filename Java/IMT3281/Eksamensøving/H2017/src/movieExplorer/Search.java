@@ -7,10 +7,17 @@ import java.io.IOException;
 
 import static movieExplorer.Constants.APIKEY;
 
+/**
+ * Class containing functions to search for different actors/movies on themoviedb.org
+ */
 public class Search {
 
-    public Search() {
-
+    /**
+     * Constructor to throw exception if a user attempts to create a new Search
+     * @throws InstantiationException The exception to throw on instantiation
+     */
+    public Search() throws InstantiationException {
+        throw new InstantiationException("Search class should not be instantiated, use member functions!");
     }
 
 
@@ -63,11 +70,38 @@ public class Search {
         return new JSON(response);
     }
 
+    /**
+     * Performs a search for which movies a given actor has partaken in
+     * @param actorIndex The index of the actor to search for
+     * @return An instance of the custom JSON class with data about the movies the actor has played in
+     */
     public static JSON takesPartIn(int actorIndex) {
         String response = null;
         String request = "https://api.themoviedb.org/3/discover/movie?api_key=APIKEY&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people=ACTORID";
         request = request.replace("APIKEY", APIKEY);
         request = request.replace("ACTORID", String.valueOf(actorIndex));
+
+        System.out.println("Search request: " + request);
+
+        try {
+            response = Unirest.get(request).asString().getBody();
+            System.out.println(response);		// Outputs JSON response from server.
+            Unirest.shutdown();			// Must be called at the end of the application
+        } catch (UnirestException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return new JSON(response);
+    }
+
+    /**
+     * Performs a search for all generes stored in themoviedb.org
+     * @return An instance of the custom JSON class with data about all available genres
+     */
+    public static JSON genres() {
+        String response = null;
+        String request = "https://api.themoviedb.org/3/genre/movie/list?api_key=APIKEY&language=en-US";
+        request = request.replace("APIKEY", APIKEY);
 
         System.out.println("Search request: " + request);
 

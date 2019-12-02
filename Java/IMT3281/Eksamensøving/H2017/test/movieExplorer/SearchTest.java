@@ -1,4 +1,4 @@
-package no.ntnu.imt3281.movieExplorer;
+package movieExplorer;
 
 import static org.junit.Assert.*;
 
@@ -6,19 +6,18 @@ import org.junit.Test;
 
 public class SearchTest {
 
-/*
 	@Test
 	public void testMultiSearch() {
 		// Multisearch should use the search feature described on https://developers.themoviedb.org/3/search/multi-search
 		// Use the search string suggested on that page (i.e. sort result by popularity)
 		// Return the result as a JSON object.
 		JSON result = Search.multiSearch("Bruce Willis");
-		assertEquals(2, result.get("results").size());									// A search for Bruce Willis return two results
+		assertEquals(3, result.get("results").size());									// A search for Bruce Willis returns three results
 		assertEquals("Bruce Willis", result.get("results").get(0).getValue("name"));		// The first is to Bruce Willis
 		assertEquals("person", result.get("results").get(0).getValue("media_type"));		// the person
 	}
 	
-	@Test
+	/*@Test
 	public void testActorSearch() {
 		// Actors should use the search feature described on https://developers.themoviedb.org/3/movies/get-movie-credits
 		// Use the search string suggested on that page (i.e. sort result by popularity)

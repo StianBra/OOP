@@ -17,7 +17,7 @@ public class SearchTest {
 		assertEquals("person", result.get("results").get(0).getValue("media_type"));		// the person
 	}
 	
-	/*@Test
+	@Test
 	public void testActorSearch() {
 		// Actors should use the search feature described on https://developers.themoviedb.org/3/movies/get-movie-credits
 		// Use the search string suggested on that page (i.e. sort result by popularity)
@@ -29,7 +29,8 @@ public class SearchTest {
 		assertEquals("Quentin Tarantino", result.get("crew").get(0).getValue("name"));	// First person in list of crew
 		assertEquals(138L, result.get("crew").get(0).getValue("id"));						// Person id (in themoviedb)
 	}
-	
+
+	/*
 	@Test
 	public void testTakesPartInSearch() {
 		// TakesPartIn should use the search feature described on https://developers.themoviedb.org/3/discover

@@ -91,6 +91,5 @@ public class TestJSONParser {
 		assertEquals("English", parsedJSON.get("spoken_languages").get(0).getValue("name"));	
 		assertEquals(3, parsedJSON.get("spoken_languages").size(), 0);						// The size of the array "spoken_languages"
 		assertEquals(2, parsedJSON.get("spoken_languages").get(0).size(), 0);					// The size of the first JSON object in "spoken_languages"
-
 	}
 }

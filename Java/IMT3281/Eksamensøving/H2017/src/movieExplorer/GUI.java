@@ -29,7 +29,9 @@ public class GUI {
      * 
      * @param event ignored
      */
+
     void search(ActionEvent event) {
+    	    /*
     		JSON result = Search.multiSearch(searchField.getText()).get("results");
     		TreeItem<SearchResultItem> searchResults = new TreeItem<> (new SearchResultItem("Searching for : "+searchField.getText()));
     		searchResultRootNode.getChildren().add(searchResults);
@@ -39,6 +41,7 @@ public class GUI {
     		}
     		searchResultRootNode.setExpanded(true);
     		searchResults.setExpanded(true);
+    		*/
     }
     
     class SearchResultItem {

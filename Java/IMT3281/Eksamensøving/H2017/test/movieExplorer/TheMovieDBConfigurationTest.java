@@ -103,6 +103,7 @@ public class TheMovieDBConfigurationTest {
 				"    ]\n",
 				"}");
 
+	/*
 	@Test
 	public void test() {
 		// The json data that has been hard coded here would normally be found by requesting : https://api.themoviedb.org/3/configuration?api_key=
@@ -120,5 +121,5 @@ public class TheMovieDBConfigurationTest {
 		assertEquals("http://image.tmdb.org/t/p/h632/dummy.jpg", result);
 		result = configuration.getStillURL("dummy.jpg");
 		assertEquals("http://image.tmdb.org/t/p/w300/dummy.jpg", result);
-	}
+	} */
 }

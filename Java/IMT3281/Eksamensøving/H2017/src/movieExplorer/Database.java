@@ -47,18 +47,36 @@ public class Database {
      * Search for genres, and add them to the database
      */
     public static void addGenres() {
-        JSON genres = Search.genres();
+        JSON movieGenres = Search.movieGenres();
+        JSON tvGenres = Search.tvGenres();
 
-        for (int i = 0; i < genres.size(); i++) {
-            // TODO: genre.size() er her 0 med testGenres, sjekk JSON strukturen
-            JSON genre = genres.get(i);
+        JSON genre = movieGenres.get("genres");
 
-            String genreValues = (String) genre.getValue(String.valueOf(0));
+        for (int i = 0; i < genre.size(); i++) {
+            String genreName = (String) genre.get(i).getValue("name");
+            long genreId = (long) genre.get(i).getValue("id");
 
-
+            try (Statement stmt = con.createStatement()) {
+                stmt.execute("INSERT INTO genres " +
+                        "VALUES (" + genreId + ",\'" + genreName + "\')");
+            } catch (SQLException e) {
+                System.err.println("Could not insert new place into the table in placesDB! " + e.getMessage());
+            }
         }
 
+        genre = tvGenres.get("genres");
 
+        for (int i = 0; i < genre.size(); i++) {
+            String genreName = (String) genre.get(i).getValue("name");
+            long genreId = (long) genre.get(i).getValue("id");
+
+            try (Statement stmt = con.createStatement()) {
+                stmt.execute("INSERT INTO genres " +
+                        "VALUES (" + genreId + ",\'" + genreName + "\')");
+            } catch (SQLException e) {
+                System.err.println("Could not insert new place into the table in placesDB! " + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -71,7 +89,11 @@ public class Database {
         JSON json = getGenres();
 
         if (json != null) {
-            return json.get(String.valueOf(genreIndex));
+            for (int i = 0; i < json.size(); i++) {
+                if ((long) json.get(i).getValue("ID") == genreIndex) {
+                    return json.get(i);
+                }
+            }
         }
 
         return null;

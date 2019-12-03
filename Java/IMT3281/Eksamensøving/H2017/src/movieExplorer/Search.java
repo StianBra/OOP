@@ -38,8 +38,7 @@ public class Search {
         try {
             response = Unirest.get(request).asString().getBody();
             System.out.println(response);		// Outputs JSON response from server.
-            Unirest.shutdown();			// Must be called at the end of the application
-        } catch (UnirestException | IOException e) {
+        } catch (UnirestException e) {
             e.printStackTrace();
         }
 
@@ -62,8 +61,7 @@ public class Search {
         try {
             response = Unirest.get(request).asString().getBody();
             System.out.println(response);		// Outputs JSON response from server.
-            Unirest.shutdown();			// Must be called at the end of the application
-        } catch (UnirestException | IOException e) {
+        } catch (UnirestException e) {
             e.printStackTrace();
         }
 
@@ -86,8 +84,7 @@ public class Search {
         try {
             response = Unirest.get(request).asString().getBody();
             System.out.println(response);		// Outputs JSON response from server.
-            Unirest.shutdown();			// Must be called at the end of the application
-        } catch (UnirestException | IOException e) {
+        } catch (UnirestException e) {
             e.printStackTrace();
         }
 
@@ -95,10 +92,31 @@ public class Search {
     }
 
     /**
-     * Performs a search for all generes stored in themoviedb.org
-     * @return An instance of the custom JSON class with data about all available genres
+     * Performs a search for all TV genres stored in themoviedb.org
+     * @return An instance of the custom JSON class with data about all available TV genres
      */
-    public static JSON genres() {
+    public static JSON tvGenres() {
+        String response = null;
+        String request = "https://api.themoviedb.org/3/genre/tv/list?api_key=APIKEY&language=en-US";
+        request = request.replace("APIKEY", APIKEY);
+
+        System.out.println("Search request: " + request);
+
+        try {
+            response = Unirest.get(request).asString().getBody();
+            System.out.println(response);		// Outputs JSON response from server.
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+
+        return new JSON(response);
+    }
+
+    /**
+     * Performs a search for all movie genres stored in themoviedb.org
+     * @return An instance of the custom JSON class with data about all available movie genres
+     */
+    public static JSON movieGenres() {
         String response = null;
         String request = "https://api.themoviedb.org/3/genre/movie/list?api_key=APIKEY&language=en-US";
         request = request.replace("APIKEY", APIKEY);
@@ -108,8 +126,7 @@ public class Search {
         try {
             response = Unirest.get(request).asString().getBody();
             System.out.println(response);		// Outputs JSON response from server.
-            Unirest.shutdown();			// Must be called at the end of the application
-        } catch (UnirestException | IOException e) {
+        } catch (UnirestException e) {
             e.printStackTrace();
         }
 

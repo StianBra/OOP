@@ -9,6 +9,6 @@ public class Genres {
             json = Database.getGenre(genreIndex);
         }
 
-        return (String) json.getValue(String.valueOf(0));
+        return (String) json.getValue("NAME");
     }
 }

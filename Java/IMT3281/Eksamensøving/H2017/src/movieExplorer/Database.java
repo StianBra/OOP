@@ -1,18 +1,15 @@
 package movieExplorer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Database {
-    private Connection con;
+    private static Connection con;
     private static Database db = null;
 
     /**
      * Creates a derby database on disk
      */
-    private Database() {
+    public Database() {
         String dbURL = "jdbc:derby:./movieDB";
 
         try {
@@ -35,8 +32,15 @@ public class Database {
      * Find all genres from the database
      * @return The JSON element containing all genre entries in the database
      */
-    public static JSON getGenres() {
+    private static JSON getGenres() {
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM genres");
+            return JSON.convert(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        return null;
     }
 
     /**
@@ -45,18 +49,32 @@ public class Database {
     public static void addGenres() {
         JSON genres = Search.genres();
 
+        for (int i = 0; i < genres.size(); i++) {
+            // TODO: genre.size() er her 0 med testGenres, sjekk JSON strukturen
+            JSON genre = genres.get(i);
+
+            String genreValues = (String) genre.getValue(String.valueOf(0));
+
+
+        }
+
 
     }
 
     /**
-     * Checks if a given genre is stored in the database
-     * @param genreIndex The genre to search for
-     * @return True if the genre is in the db, false if not stored
+     * Fetches a given genre from the database
+     * @param genreIndex The index of the genre to fetch
+     * @return A JSON object with the genre, or an empty JSON-object if it does not exist
      */
-    public static boolean findGenre(int genreIndex) {
+    public static JSON getGenre(int genreIndex) {
+        new Database();
         JSON json = getGenres();
 
-        return (json.getValue(String.valueOf(genreIndex)) != null);
+        if (json != null) {
+            return json.get(String.valueOf(genreIndex));
+        }
+
+        return null;
     }
 
     /**
@@ -76,7 +94,7 @@ public class Database {
             stmt.execute("CREATE TABLE genres (" +
                     "id int NOT NULL," +
                     "name varchar(32) NOT NULL)");
-            stmt.execute("CREATE UNIQUE INDEX idx on genres (id)");
+            stmt.execute("CREATE UNIQUE INDEX genreindex on genres (id)");
         } catch (SQLException e) {
             System.err.println("Could not create genres table in database! " + e.getMessage());
         }
@@ -93,9 +111,8 @@ public class Database {
                     "release_data varchar(255) NOT NULL," +
                     "overview varchar(255) NOT NULL," +
                     "vote_average float NOT NULL," +
-                    "popularity float NOT NULL," +
-                    "adult BIT NOT NULL)");
-            stmt.execute("CREATE UNIQUE INDEX idx on movies (id)");
+                    "popularity float NOT NULL)");
+            stmt.execute("CREATE UNIQUE INDEX movieindex on movies (id)");
         } catch (SQLException e) {
             System.err.println("Could not create movies table in database! " + e.getMessage());
         }
@@ -110,7 +127,7 @@ public class Database {
                     "id int NOT NULL," +
                     "name varchar(255) NOT NULL," +
                     "gender varchar(16) NOT NULL)");
-            stmt.execute("CREATE UNIQUE INDEX idx on actors (id)");
+            stmt.execute("CREATE UNIQUE INDEX actorindex on actors (id)");
         } catch (SQLException e) {
             System.err.println("Could not create actors table in database! " + e.getMessage());
         }

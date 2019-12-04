@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for solving https://adventofcode.com/2019/day/1, part 2
+ */
 public class Day1Part2 {
     public static void main(String[] args) {
         ArrayList<String> input = (ArrayList<String>) readInput();
@@ -27,7 +30,7 @@ public class Day1Part2 {
      * @return The total amount of fuel necessary for the mass, plus the mass of the required fuel,
      * plus that required fuel's added mass, etc.
      */
-    private static int calculateFuel(int mass) {
+    public static int calculateFuel(int mass) {
         int requiredFuel = (mass / 3) - 2;
 
         if (requiredFuel > 0) {

@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for solving https://adventofcode.com/2019/day/1, part 1
+ */
 public class Day1Part1 {
     public static void main(String[] args) {
         ArrayList<String> input = (ArrayList<String>) readInput();
@@ -17,7 +20,7 @@ public class Day1Part1 {
         System.out.println("Fuel needed: " + fuelSum);
     }
 
-    private static int calculateFuel(String line) {
+    public static int calculateFuel(String line) {
         // Get the mass of the current line
         int mass = Integer.parseInt(line);
 

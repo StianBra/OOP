@@ -1,4 +1,4 @@
-package Day1;
+package Day2;
 
 import Day2.Day2Part1;
 import org.junit.Test;

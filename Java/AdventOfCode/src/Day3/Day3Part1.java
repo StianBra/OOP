@@ -149,7 +149,7 @@ public class Day3Part1 {
      * @param gridB
      * @return
      */
-    private static int findCollisionWithShortestDistance(boolean[][] gridA, boolean[][] gridB) {
+    protected static int findCollisionWithShortestDistance(boolean[][] gridA, boolean[][] gridB) {
         int shortestDistance = MAXLENGTH;
 
         for (int i = 0; i < MAXLENGTH; i++) {
@@ -204,6 +204,4 @@ public class Day3Part1 {
 
         return lines;
     }
-
-
 }

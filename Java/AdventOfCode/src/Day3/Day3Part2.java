@@ -71,7 +71,7 @@ public class Day3Part2 {
      * @param list The list of each direction/distance to travel for the line
      * @param grid The array used to store which points have been visited
      */
-    private static void registerVisitedPoints(List<String> list, boolean[][] grid) {
+    protected static void registerVisitedPoints(List<String> list, boolean[][] grid) {
         // Defines starting x/y coordinates for the line, with origin in the centre [MAXLENGTH / 2, MAXLENGTH / 2]
         int currentXPosition = MAXLENGTH / 2;
         int currentYPosition = MAXLENGTH / 2;

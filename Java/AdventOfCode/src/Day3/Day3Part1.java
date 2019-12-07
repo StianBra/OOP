@@ -154,7 +154,7 @@ public class Day3Part1 {
 
         for (int i = 0; i < MAXLENGTH; i++) {
             for (int j = 0; j < MAXLENGTH; j++) {
-                // If there is a 'collision'
+                // If there is a 'collision', and it's not in origin
                 if (gridA[i][j] && gridA[i][j] == gridB[i][j] && (i != MAXLENGTH / 2 || j != MAXLENGTH / 2)) {
                     // Find the distance to origin
                     int newDistance = findManhattanDistance(i, j);

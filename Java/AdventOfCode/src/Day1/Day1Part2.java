@@ -12,13 +12,9 @@ import java.util.List;
 public class Day1Part2 {
     public static void main(String[] args) {
         ArrayList<String> input = (ArrayList<String>) readInput();
-        int fuelSum;
-
-        // Test stuff
-        System.out.println("Test fuel: " + calculateFuel(1969));
 
         // Processes every line from the input txt file, and gets the amount of fuel required by the mass of each line
-        fuelSum = input.stream().mapToInt(line -> calculateFuel((Integer.parseInt(line) / 3) - 2)).sum();
+        int fuelSum = input.stream().mapToInt(line -> calculateFuel(Integer.parseInt(line))).sum();
 
         System.out.println("Fuel needed: " + fuelSum);
     }
